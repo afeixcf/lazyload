@@ -1,24 +1,5 @@
 import visibleObserver from 'dom-visible-observer'
 import './index.css'
-// visibleObserver({
-//     el: document.getElementById('lazy'),
-//     show() {
-//         console.log('show')
-//     },
-//     hide() {
-//         console.log('hide')
-//     }
-// })
-// visibleObserver({
-//     container: document.querySelector('.scroll-container'),
-//     el: document.getElementById('lazy2'),
-//     show() {
-//         console.log('show2')
-//     },
-//     hide() {
-//         console.log('hide2')
-//     }
-// })
 
 function lazyload({
     container = document,

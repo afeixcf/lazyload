@@ -117,7 +117,6 @@ function lazyload(_ref) {
         el: el,
         threshold: threshold,
         show: function show() {
-            console.log(3);
             if (el.src !== defaultSrc) return;
             proxyImage(src, function () {
                 el.src = src;
@@ -129,9 +128,7 @@ function lazyload(_ref) {
                 }, 50);
             });
         },
-        hide: function hide() {
-            console.log(4);
-        }
+        hide: function hide() {}
     });
 }
 
