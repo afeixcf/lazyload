@@ -23,15 +23,5 @@ module.exports = {
         loader: 'babel-loader'
       }
     ]
-  },
-
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: '测试',
-      template: 'index.html',
-      filename: 'index.html',
-      chunks: ['main', 'index'],
-      inject: 'body'
-    })
-  ]
+  }
 }

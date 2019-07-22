@@ -83,26 +83,6 @@ __webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// visibleObserver({
-//     el: document.getElementById('lazy'),
-//     show() {
-//         console.log('show')
-//     },
-//     hide() {
-//         console.log('hide')
-//     }
-// })
-// visibleObserver({
-//     container: document.querySelector('.scroll-container'),
-//     el: document.getElementById('lazy2'),
-//     show() {
-//         console.log('show2')
-//     },
-//     hide() {
-//         console.log('hide2')
-//     }
-// })
-
 function lazyload(_ref) {
     var _ref$container = _ref.container,
         container = _ref$container === undefined ? document : _ref$container,
@@ -347,8 +327,8 @@ var update = __webpack_require__(5)(content, options);
 if(content.locals) module.exports = content.locals;
 
 if(false) {
-	module.hot.accept("!!./node_modules/_css-loader@3.1.0@css-loader/dist/cjs.js!./index.css", function() {
-		var newContent = require("!!./node_modules/_css-loader@3.1.0@css-loader/dist/cjs.js!./index.css");
+	module.hot.accept("!!./node_modules/_css-loader@3.1.0@css-loader/dist/cjs.js!./node_modules/_postcss-loader@3.0.0@postcss-loader/src/index.js!./index.css", function() {
+		var newContent = require("!!./node_modules/_css-loader@3.1.0@css-loader/dist/cjs.js!./node_modules/_postcss-loader@3.0.0@postcss-loader/src/index.js!./index.css");
 
 		if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 
@@ -379,7 +359,7 @@ if(false) {
 
 exports = module.exports = __webpack_require__(4)(false);
 // Module
-exports.push([module.i, ".lazyload-fadein {\n    transition: opacity .5s ease-in-out;\n}", ""]);
+exports.push([module.i, ".lazyload-fadein {\n    -webkit-transition: opacity .5s ease-in-out;\n    transition: opacity .5s ease-in-out;\n}", ""]);
 
 
 /***/ }),
