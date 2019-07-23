@@ -20,7 +20,7 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-es2015": "^6.24.1",
     "css-loader": "^3.1.0",
-    "dom-visible-observer": "^1.0.9",
+    "dom-visible-observer": "^1.0.12",
     "html-webpack-plugin": "^3.2.0",
     "postcss-loader": "^3.0.0",
     "style-loader": "^0.23.1"
