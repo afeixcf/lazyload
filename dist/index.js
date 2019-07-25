@@ -87,10 +87,15 @@ function lazyload(_ref) {
     var _ref$container = _ref.container,
         container = _ref$container === undefined ? document : _ref$container,
         el = _ref.el,
-        defaultSrc = _ref.defaultSrc,
         src = _ref.src,
         _ref$threshold = _ref.threshold,
         threshold = _ref$threshold === undefined ? 0 : _ref$threshold;
+
+    var errorMsg = checkParamIterator(checkElTag, checkImgSrc, checkThreshold)({ el: el, src: src, threshold: threshold });
+
+    if (errorMsg) return;
+
+    var defaultSrc = el.src;
 
     return (0, _domVisibleObserver2.default)({
         container: container,
@@ -116,6 +121,37 @@ function proxyImage(src, cb) {
     var Img = new Image();
     Img.src = src;
     Img.onload = cb;
+}
+
+function checkElTag(param) {
+    var el = param.el;
+
+    if (!el || !el.tagName || el.tagName.toLowerCase() !== 'img') {
+        return 'missing el parameter or el is not a ' + new Image().toString();
+    }
+}
+function checkImgSrc(param) {
+    var src = param.src;
+
+    if (!src || !/^(http:|data:|https:)/.test(src)) {
+        return 'missing src parameter or src is not a correct Picture address';
+    }
+}
+function checkThreshold(param) {
+    if (typeof param.threshold !== 'number') {
+        return 'threshold must be a number';
+    }
+}
+function checkParamIterator() {
+    var args = [].slice.call(arguments);
+    var msg = '';
+    return function (param) {
+        for (var i = 0; i < args.length; i++) {
+            msg = args[i](param);
+            msg && console.error(msg);
+        }
+        return msg;
+    };
 }
 
 exports.default = lazyload;
@@ -201,7 +237,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  * @param
  *  container 滚动容器
  *  el 侦测的dom
- *  threshold 插值 number类型
+ *  threshold 差值 number类型
  *  show 当el显示在当前可视窗口时的回调函数
  *  hide 当el不在当前可视窗口时的回调函数
  * @return
@@ -219,9 +255,10 @@ function visibleObserver(_ref) {
     var init = throttle(function (e) {
         var scrollTop = getScrollTop(container);
         var offsetTop = getOffsetTop(el, container);
+        var offsetHeight = el.offsetHeight;
         var windowHeight = getWindowHeight(container);
 
-        if (scrollTop + windowHeight > offsetTop - threshold) {
+        if (scrollTop + windowHeight > offsetTop - threshold && offsetTop + offsetHeight + threshold > scrollTop) {
             show && show();
         } else {
             hide && hide();
@@ -233,11 +270,11 @@ function visibleObserver(_ref) {
         passive: true
     });
 
-    var destory = function destory() {
+    var destroy = function destroy() {
         container.removeEventListener('scroll', init);
     };
 
-    return { destory: destory };
+    return { destroy: destroy };
 }
 
 function throttle(func, wait) {
@@ -294,7 +331,6 @@ function getOffsetLeft(elem) {
 }
 
 function getOffsetTop(elem, container) {
-    if (container.style) container.style.position = 'relative';
     return elem.offsetParent && elem.offsetParent !== container ? elem.offsetTop + getOffsetTop(elem.offsetParent, container) : elem.offsetTop;
 }
 
