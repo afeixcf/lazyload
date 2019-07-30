@@ -89,7 +89,9 @@ function lazyload(_ref) {
         el = _ref.el,
         src = _ref.src,
         _ref$threshold = _ref.threshold,
-        threshold = _ref$threshold === undefined ? 0 : _ref$threshold;
+        threshold = _ref$threshold === undefined ? 0 : _ref$threshold,
+        _ref$effect = _ref.effect,
+        effect = _ref$effect === undefined ? '' : _ref$effect;
 
     var errorMsg = checkParamIterator(checkElTag, checkImgSrc, checkThreshold)({ el: el, src: src, threshold: threshold });
 
@@ -105,12 +107,13 @@ function lazyload(_ref) {
             if (el.src !== defaultSrc) return;
             proxyImage(src, function () {
                 el.src = src;
-                el.style.opacity = 0;
-
-                setTimeout(function () {
-                    el.className += ' lazyload-fadein';
-                    el.style.opacity = 1;
-                }, 50);
+                if (effect === 'fadein') {
+                    el.style.opacity = 0;
+                    setTimeout(function () {
+                        el.className += ' lazyload-fadein';
+                        el.style.opacity = 1;
+                    }, 50);
+                }
             });
         },
         hide: function hide() {}

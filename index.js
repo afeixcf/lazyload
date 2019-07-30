@@ -5,7 +5,8 @@ function lazyload({
     container = document,
     el,
     src,
-    threshold = 0
+    threshold = 0,
+    effect = ''
 }) {
     const errorMsg = checkParamIterator(
         checkElTag,
@@ -25,13 +26,14 @@ function lazyload({
             if (el.src !== defaultSrc) return
             proxyImage(src, () => {
                 el.src = src
-                el.style.opacity = 0
-
-                setTimeout(() => {
-                    el.className +=
-                        ' lazyload-fadein'
-                    el.style.opacity = 1
-                }, 50)
+                if (effect === 'fadein') {
+                    el.style.opacity = 0
+                    setTimeout(() => {
+                        el.className +=
+                            ' lazyload-fadein'
+                        el.style.opacity = 1
+                    }, 50)
+                } 
             })
         },
         hide() {}
