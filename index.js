@@ -1,5 +1,4 @@
 import visibleObserver from 'dom-visible-observer'
-import './index.css'
 
 function lazyload({
     container = document,
@@ -29,8 +28,8 @@ function lazyload({
                 if (effect === 'fadein') {
                     el.style.opacity = 0
                     setTimeout(() => {
-                        el.className +=
-                            ' lazyload-fadein'
+                        el.style.transition = '.3s all linear'
+                        el.style.webkitTransition = '.3s all linear'
                         el.style.opacity = 1
                     }, 50)
                 } 
