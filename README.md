@@ -2,6 +2,8 @@
 适用于图片懒加载
 
 ```
+npm i baselazyload -S
+
 import lazyload form 'baselazyload'
 
 lazyload({
